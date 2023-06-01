@@ -2,10 +2,13 @@ package com.example.michelpatty_20411110_projectakhir
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageButton
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,16 +24,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val logout = findViewById<ImageButton>(R.id.btn_logout)
+        logout.setOnClickListener {
+            logout()
+        }
+
 //Lagu R&B
         val RecyclerView = findViewById<RecyclerView>(R.id.lagurnbRV)
 
         listlagu = ArrayList()
 
-        listlagu.add(itemData(R.drawable.theweeknd,R.drawable.favorite_icon, "After Hours", "The Weeknd"))
-        listlagu.add(itemData(R.drawable.drake,R.drawable.favorite_icon, "Scorpion", "Drake"))
-        listlagu.add(itemData(R.drawable.postmalone,R.drawable.favorite_icon, "Stoney", "Post Malone"))
-        listlagu.add(itemData(R.drawable.akon, R.drawable.favorite_icon,"Trouble", "Akon"))
-        listlagu.add(itemData(R.drawable.brunomars,R.drawable.favorite_icon, "24K Magic", "Bruno Mars"))
+        listlagu.add(itemData(R.drawable.theweeknd, "After Hours", "The Weeknd",R.drawable.theweeknd2, "Is There Someone Else","The Weeknd", R.drawable.theweeknd3, "Blinding Light", "The Weekend", R.drawable.theweeknd, "Save Your Tears", "The Weekend & Ariana Grande"))
+        listlagu.add(itemData(R.drawable.drake, "Scorpion", "Drake",R.drawable.drake2, "God's Plan","Drake", R.drawable.drake3, "Hotline Bling", "Drake", R.drawable.drake, "Laugh Now Cry Later", "Drake ft. Lil Durk"))
+        listlagu.add(itemData(R.drawable.postmalone, "Stoney", "Post Malone",R.drawable.postmalone2, "Circles","Post Malone", R.drawable.postmalone3, "GoodByes", "Post Malone ft. Youngthug", R.drawable.postmalone, "Sunflower", "Post Malone, Swaelee"))
+        listlagu.add(itemData(R.drawable.akon, "Trouble", "Akon",R.drawable.akon2, "Be With You","Akon", R.drawable.akon3, "Lonely", "Akon", R.drawable.akon, "Let It Go", "Akon & Wiz Khalifa"))
+        listlagu.add(itemData(R.drawable.brunomars,"24K Magic", "Bruno Mars",R.drawable.brunomars2, "Too Good To Say Goodbye","Bruno Mars", R.drawable.brunomars3, "Versace On The Floor", "Bruno Mars", R.drawable.brunomars, "When I Was Your Man", "Bruno Mars"))
 
         RecyclerView.setHasFixedSize(true)
         RecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
@@ -45,11 +53,11 @@ class MainActivity : AppCompatActivity() {
         val RecyclerView1 = findViewById<RecyclerView>(R.id.laguindopopRV)
         listlagu = ArrayList()
 
-        listlagu.add(itemData(R.drawable.lyodra,R.drawable.favorite_icon, "Lyodra", "Lyodra"))
-        listlagu.add(itemData(R.drawable.tiaraandini,R.drawable.favorite_icon, "Tiara Andini", "Tiara Andini"))
-        listlagu.add(itemData(R.drawable.mahalini,R.drawable.favorite_icon, "Fabula", "Mahalini"))
-        listlagu.add(itemData(R.drawable.ziva,R.drawable.favorite_icon, "Magnoliya", "Ziva"))
-        listlagu.add(itemData(R.drawable.glenn,R.drawable.favorite_icon, "Kembali", "Glenn Fredly"))
+        listlagu.add(itemData(R.drawable.lyodra, "Lyodra", "Lyodra",R.drawable.theweeknd2, "Save Your Tears","The Weekend", R.drawable.theweeknd2, "Is There Someone Else", "The Weekend", R.drawable.theweeknd2, "Save Your Tears", "The Weekend & Ariana Grande"))
+        listlagu.add(itemData(R.drawable.tiaraandini, "Tiara Andini", "Tiara Andini",R.drawable.theweeknd2, "Save Your Tears","The Weekend", R.drawable.theweeknd2, "Is There Someone Else", "The Weekend", R.drawable.theweeknd2, "Save Your Tears", "The Weekend & Ariana Grande"))
+        listlagu.add(itemData(R.drawable.mahalini, "Fabula", "Mahalini",R.drawable.theweeknd2, "Save Your Tears","The Weekend", R.drawable.theweeknd2, "Is There Someone Else", "The Weekend", R.drawable.theweeknd2, "Save Your Tears", "The Weekend & Ariana Grande"))
+        listlagu.add(itemData(R.drawable.ziva, "Magnoliya", "Ziva",R.drawable.theweeknd2, "Save Your Tears","The Weekend", R.drawable.theweeknd2, "Is There Someone Else", "The Weekend", R.drawable.theweeknd2, "Save Your Tears", "The Weekend & Ariana Grande"))
+        listlagu.add(itemData(R.drawable.glenn,"Kembali", "Glenn Fredly",R.drawable.theweeknd2, "Save Your Tears","The Weekend", R.drawable.theweeknd2, "Is There Someone Else", "The Weekend", R.drawable.theweeknd2, "Save Your Tears", "The Weekend & Ariana Grande"))
 
         RecyclerView1.setHasFixedSize(true)
         RecyclerView1.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
@@ -64,11 +72,11 @@ class MainActivity : AppCompatActivity() {
         val RecyclerView2 = findViewById<RecyclerView>(R.id.laguedmRV)
         listlagu = ArrayList()
 
-        listlagu.add(itemData(R.drawable.diplo,R.drawable.favorite_icon, "Revolution", "Diplo"))
-        listlagu.add(itemData(R.drawable.djsnake,R.drawable.favorite_icon, "Encore", "Dj Snake"))
-        listlagu.add(itemData(R.drawable.skrillex,R.drawable.favorite_icon, "Recess", "Skrillex"))
-        listlagu.add(itemData(R.drawable.martingarrix,R.drawable.favorite_icon, "Martin Garrix", "Martin Garrix"))
-        listlagu.add(itemData(R.drawable.yellowclaw, R.drawable.favorite_icon,"New Blood", "Yellow Claw"))
+        listlagu.add(itemData(R.drawable.diplo, "Revolution", "Diplo",R.drawable.theweeknd2, "Save Your Tears","The Weekend", R.drawable.theweeknd2, "Is There Someone Else", "The Weekend", R.drawable.theweeknd2, "Save Your Tears", "The Weekend & Ariana Grande"))
+        listlagu.add(itemData(R.drawable.djsnake,"Encore", "Dj Snake",R.drawable.theweeknd2, "Save Your Tears","The Weekend", R.drawable.theweeknd2, "Is There Someone Else", "The Weekend", R.drawable.theweeknd2, "Save Your Tears", "The Weekend & Ariana Grande"))
+        listlagu.add(itemData(R.drawable.skrillex, "Recess", "Skrillex",R.drawable.theweeknd2, "Save Your Tears","The Weekend", R.drawable.theweeknd2, "Is There Someone Else", "The Weekend", R.drawable.theweeknd2, "Save Your Tears", "The Weekend & Ariana Grande"))
+        listlagu.add(itemData(R.drawable.martingarrix, "Martin Garrix", "Martin Garrix",R.drawable.theweeknd2, "Save Your Tears","The Weekend", R.drawable.theweeknd2, "Is There Someone Else", "The Weekend", R.drawable.theweeknd2, "Save Your Tears", "The Weekend & Ariana Grande"))
+        listlagu.add(itemData(R.drawable.yellowclaw, "New Blood", "Yellow Claw",R.drawable.theweeknd2, "Save Your Tears","The Weekend", R.drawable.theweeknd2, "Is There Someone Else", "The Weekend", R.drawable.theweeknd2, "Save Your Tears", "The Weekend & Ariana Grande"))
 
         RecyclerView2.setHasFixedSize(true)
         RecyclerView2.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
@@ -83,11 +91,11 @@ class MainActivity : AppCompatActivity() {
         val RecyclerView3 = findViewById<RecyclerView>(R.id.lagurapRV)
         listlagu = ArrayList()
 
-        listlagu.add(itemData(R.drawable.travisscott,R.drawable.favorite_icon, "Astroworld", "Travis Scott"))
-        listlagu.add(itemData(R.drawable.tyga,R.drawable.favorite_icon, "Last King", "Tyga"))
-        listlagu.add(itemData(R.drawable.eminem,R.drawable.favorite_icon,"MTBMB", "Eminem"))
-        listlagu.add(itemData(R.drawable.kendricklamar,R.drawable.favorite_icon, "Damn", "Kendrick Lamar"))
-        listlagu.add(itemData(R.drawable.migos,R.drawable.favorite_icon, "Culture II", "Migos"))
+        listlagu.add(itemData(R.drawable.travisscott, "Astroworld", "Travis Scott",R.drawable.theweeknd2, "Save Your Tears","The Weekend", R.drawable.theweeknd2, "Is There Someone Else", "The Weekend", R.drawable.theweeknd2, "Save Your Tears", "The Weekend & Ariana Grande"))
+        listlagu.add(itemData(R.drawable.tyga, "Last King", "Tyga",R.drawable.theweeknd2, "Save Your Tears","The Weekend", R.drawable.theweeknd2, "Is There Someone Else", "The Weekend", R.drawable.theweeknd2, "Save Your Tears", "The Weekend & Ariana Grande"))
+        listlagu.add(itemData(R.drawable.eminem,"MTBMB", "Eminem",R.drawable.theweeknd2, "Save Your Tears","The Weekend", R.drawable.theweeknd2, "Is There Someone Else", "The Weekend", R.drawable.theweeknd2, "Save Your Tears", "The Weekend & Ariana Grande"))
+        listlagu.add(itemData(R.drawable.kendricklamar, "Damn", "Kendrick Lamar",R.drawable.theweeknd2, "Save Your Tears","The Weekend", R.drawable.theweeknd2, "Is There Someone Else", "The Weekend", R.drawable.theweeknd2, "Save Your Tears", "The Weekend & Ariana Grande"))
+        listlagu.add(itemData(R.drawable.migos, "Culture II", "Migos",R.drawable.theweeknd2, "Save Your Tears","The Weekend", R.drawable.theweeknd2, "Is There Someone Else", "The Weekend", R.drawable.theweeknd2, "Save Your Tears", "The Weekend & Ariana Grande"))
 
         RecyclerView3.setHasFixedSize(true)
         RecyclerView3.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
@@ -98,26 +106,18 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+    }
+    //    Function signOut dari akun dan berpindah halaman dengan memangggil function navigateToLoginPage
+    private fun logout() {
+        FirebaseAuth.getInstance().signOut()
+        navigateToLoginPage()
+    }
 
-
-//Baru Diputar
-        val RecyclerView4 = findViewById<RecyclerView>(R.id.baruRV)
-        listlagu = ArrayList()
-
-        listlagu.add(itemData(R.drawable.travisscott,R.drawable.favorite_icon, "Astroworld", "Travis Scott"))
-        listlagu.add(itemData(R.drawable.tyga,R.drawable.favorite_icon, "Last King", "Tyga"))
-        listlagu.add(itemData(R.drawable.eminem,R.drawable.favorite_icon, "MTBMB", "Eminem"))
-        listlagu.add(itemData(R.drawable.kendricklamar,R.drawable.favorite_icon, "Damn", "Kendrick Lamar"))
-        listlagu.add(itemData(R.drawable.migos,R.drawable.favorite_icon, "Culture II", "Migos"))
-
-        RecyclerView4.setHasFixedSize(true)
-        RecyclerView4.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
-
-        RecyclerView4.adapter = MyAdapter(this, listlagu){
-            val intent = Intent(this, DetailActivity::class.java)
-            intent.putExtra(INTENT_PARCELABLE, it)
-            startActivity(intent)
-        }
-
+    //    Function untuk berpindah halaman
+    private fun navigateToLoginPage() {
+        val intent = Intent(this, Login::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        finish()
     }
 }

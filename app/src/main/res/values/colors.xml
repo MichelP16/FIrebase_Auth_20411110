@@ -12,4 +12,5 @@
     <color name="bgcolor3">#205295</color>
     <color name="white">#FFFFFFFF</color>
     <color name="white2">#EACCCC</color>
+    <color name="grey">#201F1F</color>
 </resources>
